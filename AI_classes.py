@@ -12,7 +12,4 @@ class Branch:
         self.question = Branch_q
 
     def get_offshoots(self):
-        """
-        Returns a tuple of a branches two childs in order (child_1, child_2).
-        """
         return (self.child_1, self.child_2)
