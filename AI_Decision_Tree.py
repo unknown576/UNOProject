@@ -11,11 +11,11 @@ class CPUPlayer:
             Branch_q=self.has_wild_draw_four,  # Branch question: Do we have a Wild Draw Four?
             child_1=Leaf("Play Wild Draw Four"),  # Child 1: Yes, play it.
             child_2=Branch(  # Child 2: No, check the next question.
-                Branch_q=self.has_matching_card,  # Do we have a card matching current color or number?
-                child_1=Leaf("Play matching card"),  # Yes, play it.
+                Branch_q=self.has_skip_card,  # Do we have a card matching current color or number?
+                child_1=Leaf("Play Skip card"),  # Yes, play it.
                 child_2=Branch(  # No, check the next question: skip card, wild card, +2 card, reverse card, etc.
-                    Branch_q=self.has_skip_card,  # Do we have a Skip card?
-                    child_1=Leaf("Play Skip card"),  # Yes, play it.
+                    Branch_q=self.has_matching_card(),  # Do we have a Skip card?
+                    child_1=Leaf("Play matching card"),  # Yes, play it.
                     child_2=Branch(  # No, check for a Wild card.
                         Branch_q=self.has_wild_card,  # Do we have a Wild card?
                         child_1=Leaf("Play Wild card"),  # Yes, play it.
