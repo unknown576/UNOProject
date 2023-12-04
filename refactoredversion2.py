@@ -1,5 +1,5 @@
 import random
-
+from AI_Decision_Tree import  CPUPlayer
 
 class UNOGame:
     def __init__(self, num_players):
@@ -246,5 +246,20 @@ if __name__ == "__main__":
         except ValueError:
             print("ERROR: Please enter a valid integer.")
 
+    opponent_choice = None
+    while opponent_choice is None:
+        try:
+            opponent_choice = int(input("Select opponent: 1 for AI, 2 for Human players: "))
+            if opponent_choice not in [1, 2]:
+                print("ERROR: Invalid choice, please select 1 for AI or 2 for Human players.")
+                opponent_choice = None
+        except ValueError:
+            print("ERROR: Please enter a valid choice.")
+
     uno_game = UNOGame(num_players)
+
+    if opponent_choice == 1:
+        cpu_player = CPUPlayer("AI")
+        uno_game.players[-1] = cpu_player.hand  # Set AI as the last player
+
     uno_game.play_game()
