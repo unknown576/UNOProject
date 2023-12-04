@@ -146,6 +146,7 @@ class UNOGame:
         print(f"Starting game with {len(self.game_deck)} cards in deck.")
         for player in range(self.num_players):
             self.players[player] = self.draw_cards(7)
+            self.players[player] = sorted(self.players[player], key=lambda x: (x.split()[0], x.split()[1]))
             print(f"Player {player + 1} initial cards: {self.players[player]}")
 
     # The play_turn method involves various conditional statements,
@@ -163,11 +164,11 @@ class UNOGame:
                 chosen_card_index = int(input("Please select a card to play: ")) - 1
 
             while not (0 <= chosen_card_index < len(original_hand)) or not self.valid_card(
-                    self.current_color, self.card_value, [original_hand[chosen_card_index]]):
+                    self.current_color, self.card_value, [sorted_hand[chosen_card_index]]):
                 chosen_card_index = int(input("Please choose a valid card to play: ")) - 1
 
             played_card = sorted_hand[chosen_card_index]
-            chosen_card = original_hand[chosen_card_index]
+            chosen_card = sorted_hand[chosen_card_index]
 
             if played_card.split()[1] == "7":
                 self.handle_seven_rule()
